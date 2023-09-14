@@ -1,0 +1,244 @@
+﻿@using Andretta.Library.Business.Models;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    :root {
+        --g-title-size: 25px;
+        --g-text-size: 10px;
+
+        --g-title-weight: 100;
+        --g-text-weight: 200;
+
+        --g-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .container {
+        margin: .5rem;
+    }
+
+    /* [Header] */
+
+    .header {
+        background-color: rgb(102, 128, 201);
+        font-family: var(--g-font-family);
+        color: #FFF;
+        font-weight: 100;
+        border-radius: .4rem;
+    }
+
+    .header .grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-inline-start: 1.5rem;
+        margin-inline-end: 1.5rem;
+    }
+
+    .header .header-left {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;    
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 40%;
+    }
+
+    .header .header-left p {
+        font-weight: bold;
+    }
+  
+    .header .header-left div p {
+        font-weight: 400;
+    }
+
+    .header .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+    }
+
+    .header .header-right .block {
+        margin: 1.1rem;
+        background-color: rgb(34, 10, 141);
+        border-radius: .4rem;
+    }
+
+    .header .header-right .block ul {
+        padding: 1rem 1rem 1rem 1rem;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        gap: .75rem; 
+    }
+
+    .header .header-right .icon-divisor {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .4rem;
+    }
+
+    .header .header-right .icon-divisor img {
+        filter: invert(100%);        
+        height: 1.1rem;
+        width: 1.1rem;
+    }
+
+    .header .header-right .icon-divisor p {
+        color: #FFF;
+    }
+
+    /* [Report Information] */
+
+    .report-information {
+        font-family: var(--g-font-family);
+        margin-top: 1.1rem;
+    }
+
+    .block-content {
+        display: flex;
+        gap: 2.5rem;
+    }
+
+    .block-content div {
+        padding: 3rem 0 3rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+        justify-content: space-between;
+        width: 50%;
+        background-color: rgb(34, 10, 141);
+        border-radius: .4rem;
+    }
+
+    .block-content p:first-child {
+        font-size: 1.5rem;
+    }
+
+
+    .block-content p {
+        font-weight: 100;
+        color: #FFF;
+        text-align: center;
+    }
+
+    .block-content hr {
+        width: 90%;
+        border-width: .5px;
+    }
+
+    .block-content p:first-child {
+    }
+
+</style>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="grid">
+                <div class="header-left">
+                    <p>Andretta Library</p>
+                    <div>
+                        <p>BOOK REPORT:</p>
+                        <p>EXECUTIVE SUMMARY</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="block">
+                        <ul>
+                            <li>
+                                <div class="icon-divisor">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/4820/4820122.png">
+                                    <p>Andretta Library Hearth Street, Amerilon, FL 2123</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-divisor">
+                                    <img src="https://assets.stickpng.com/images/5a452601546ddca7e1fcbc87.png">
+                                    <p>+55 (11) 93456-1234</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-divisor">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/90/90417.png">
+                                    <p>Book Library</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="report-information">
+            <div class="block-content">
+                <div>
+                    <p>Highest Quantity of Stock of a Book</p>
+                    <hr>
+                    <p>@Model.HighestQuantityStockBook.Title - Quantity: @Model.HighestQuantityStockBook.Quantity</p>
+                </div>
+                <div>
+                    <p>Lowest Quantity of Stock of a Book</p>
+                    <hr>
+                    <p>@Model.LowestQuantityStockBook.Title - Quantity: @Model.LowestQuantityStockBook.Quantity</p>
+                </div>
+            </div>
+        </section>
+        <section class="report-information">
+            <div class="block-content">
+                <div>
+                    <p>Highest Unit Price of Stock of a Book</p>
+                    <hr>
+                    <p>@Model.HighestUnitPriceStockBook.Title - Unit Price: @Model.HighestUnitPriceStockBook.Price</p>
+                </div>
+                <div>
+                    <p>Lowest Unit Price of Stock of a Book</p>
+                    <hr>
+                    <p>@Model.LowestUnitPriceStockBook.Title - Unit Price: @Model.LowestUnitPriceStockBook.Price</p>
+                </div>
+            </div>
+        </section>
+        <section class="report-information">
+            <div class="block-content">
+                <div>
+                    <p>Highest Total price of a Book</p>
+                    <hr>
+                    <p>@Model.HighestTotalPriceBook.Name - Total Price: @Model.HighestTotalPriceBook.TotalPrice</p>
+                </div>
+                <div>
+                    <p>Lowest Total price of a Book</p>
+                    <hr>
+                    <p>@Model.LowestTotalPriceBook.Name - Total Price: @Model.LowestTotalPriceBook.TotalPrice</p>
+                </div>
+            </div>
+        </section>
+        <section class="report-information">
+            <div class="block-content">
+                <div>
+                    <p>Highest Published Date of a Book</p>
+                    <hr>
+                    <p>@Model.HighestPublishDateBook.Name / @Model.HighestPublishDateBook.Book - Published Date: @Model.HighestPublishDateBook.PublishedDate</p>
+                </div>
+                <div>
+                    <p>Aleatory Author of Day</p>
+                    <hr>
+                    <p>@Model.LowestPublishDateBook.Name / @Model.LowestPublishDateBook.Book - Published Date: @Model.LowestPublishDateBook.PublishedDate</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
