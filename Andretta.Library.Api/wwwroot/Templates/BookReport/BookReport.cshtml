@@ -32,11 +32,13 @@
     /* [Header] */
 
     .header {
-        background-color: rgb(102, 128, 201);
+        background-color: #5c689e;
         font-family: var(--g-font-family);
         color: #FFF;
         font-weight: 100;
-        border-radius: .4rem;
+        width: 100vw;
+        border-top-right-radius: .4rem;
+        border-top-left-radius: .4rem;
     }
 
     .header .grid {
@@ -73,7 +75,7 @@
 
     .header .header-right .block {
         margin: 1.1rem;
-        background-color: rgb(34, 10, 141);
+        background-color: #2F3C7E;
         border-radius: .4rem;
     }
 
@@ -110,19 +112,17 @@
     }
 
     .block-content {
-        display: flex;
-        gap: 2.5rem;
+        margin: 15rem 4rem 0 25rem;
     }
 
     .block-content div {
-        padding: 3rem 0 3rem 0;
+        padding: 3rem 0rem 3rem 0rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1.1rem;
         justify-content: space-between;
-        width: 50%;
-        background-color: rgb(34, 10, 141);
+        background-color: #2F3C7E;
         border-radius: .4rem;
     }
 
@@ -142,90 +142,108 @@
         border-width: .5px;
     }
 
-    .block-content p:first-child {
+    /* [Background Triangle] */
+
+    .background-triangle:after {
+        content: ' ';
+        border-top: 100vh solid #8690bd;
+        border-right: 100vw solid transparent;
+        border-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 33%, rgba(0,212,255,1) 100%);;
+        width: 0;
+        position: absolute;
+        z-index: -1;
     }
 
 </style>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="grid">
-                <div class="header-left">
-                    <p>Andretta Library</p>
+        <div class="background-triangle">
+            <header class="header">
+                <div class="grid">
+                    <div class="header-left">
+                        <p>Andretta Library</p>
+                        <div>
+                            <p>BOOK REPORT:</p>
+                            <p>EXECUTIVE SUMMARY</p>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="block">
+                            <ul>
+                                <li>
+                                    <div class="icon-divisor">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/4820/4820122.png">
+                                        <p>Andretta Library Hearth Street, Amerilon, FL 2123</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-divisor">
+                                        <img src="https://assets.stickpng.com/images/5a452601546ddca7e1fcbc87.png">
+                                        <p>+55 (11) 93456-1234</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-divisor">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/90/90417.png">
+                                        <p>Book Library</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="background-triangle">
+            <section style="page-break-after: always;" class="report-information">
+                <div class="block-content">
                     <div>
-                        <p>BOOK REPORT:</p>
-                        <p>EXECUTIVE SUMMARY</p>
+                        <p>Highest Quantity of Stock of a Book</p>
+                        <hr>
+                        <p>@Model.HighestQuantityStockBook.Title - Quantity: @Model.HighestQuantityStockBook.Quantity</p>
+                    </div>
+                    <div>
+                        <p>Lowest Quantity of Stock of a Book</p>
+                        <hr>
+                        <p>@Model.LowestQuantityStockBook.Title - Quantity: @Model.LowestQuantityStockBook.Quantity</p>
                     </div>
                 </div>
-                <div class="header-right">
-                    <div class="block">
-                        <ul>
-                            <li>
-                                <div class="icon-divisor">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/4820/4820122.png">
-                                    <p>Andretta Library Hearth Street, Amerilon, FL 2123</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon-divisor">
-                                    <img src="https://assets.stickpng.com/images/5a452601546ddca7e1fcbc87.png">
-                                    <p>+55 (11) 93456-1234</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon-divisor">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/90/90417.png">
-                                    <p>Book Library</p>
-                                </div>
-                            </li>
-                        </ul>
+            </section>
+        </div>
+        <div class="background-triangle">
+            <section style="page-break-after: always;" class="report-information">
+                <div class="block-content">
+                    <div>
+                        <p>Highest Unit Price of Stock of a Book</p>
+                        <hr>
+                        <p>@Model.HighestUnitPriceStockBook.Title - Unit Price: @Model.HighestUnitPriceStockBook.Price</p>
+                    </div>
+                    <div>
+                        <p>Lowest Unit Price of Stock of a Book</p>
+                        <hr>
+                        <p>@Model.LowestUnitPriceStockBook.Title - Unit Price: @Model.LowestUnitPriceStockBook.Price</p>
                     </div>
                 </div>
-            </div>
-        </header>
-        <section class="report-information">
-            <div class="block-content">
-                <div>
-                    <p>Highest Quantity of Stock of a Book</p>
-                    <hr>
-                    <p>@Model.HighestQuantityStockBook.Title - Quantity: @Model.HighestQuantityStockBook.Quantity</p>
+            </section>
+        </div>
+        
+        <div class="background-triangle">
+            <section style="page-break-after: always;" class="report-information">
+                <div class="block-content">
+                    <div>
+                        <p>Highest Total price of a Book</p>
+                        <hr>
+                        <p>@Model.HighestTotalPriceBook.Name - Total Price: @Model.HighestTotalPriceBook.TotalPrice</p>
+                    </div>
+                    <div>
+                        <p>Lowest Total price of a Book</p>
+                        <hr>
+                        <p>@Model.LowestTotalPriceBook.Name - Total Price: @Model.LowestTotalPriceBook.TotalPrice</p>
+                    </div>
                 </div>
-                <div>
-                    <p>Lowest Quantity of Stock of a Book</p>
-                    <hr>
-                    <p>@Model.LowestQuantityStockBook.Title - Quantity: @Model.LowestQuantityStockBook.Quantity</p>
-                </div>
-            </div>
-        </section>
-        <section class="report-information">
-            <div class="block-content">
-                <div>
-                    <p>Highest Unit Price of Stock of a Book</p>
-                    <hr>
-                    <p>@Model.HighestUnitPriceStockBook.Title - Unit Price: @Model.HighestUnitPriceStockBook.Price</p>
-                </div>
-                <div>
-                    <p>Lowest Unit Price of Stock of a Book</p>
-                    <hr>
-                    <p>@Model.LowestUnitPriceStockBook.Title - Unit Price: @Model.LowestUnitPriceStockBook.Price</p>
-                </div>
-            </div>
-        </section>
-        <section class="report-information">
-            <div class="block-content">
-                <div>
-                    <p>Highest Total price of a Book</p>
-                    <hr>
-                    <p>@Model.HighestTotalPriceBook.Name - Total Price: @Model.HighestTotalPriceBook.TotalPrice</p>
-                </div>
-                <div>
-                    <p>Lowest Total price of a Book</p>
-                    <hr>
-                    <p>@Model.LowestTotalPriceBook.Name - Total Price: @Model.LowestTotalPriceBook.TotalPrice</p>
-                </div>
-            </div>
-        </section>
-        <section class="report-information">
+            </section>
+        </div>
+        <section style="page-break-after: always;" class="report-information">
             <div class="block-content">
                 <div>
                     <p>Highest Published Date of a Book</p>

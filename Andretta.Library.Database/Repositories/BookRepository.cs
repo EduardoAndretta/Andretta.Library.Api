@@ -2,6 +2,8 @@
 using Andretta.Library.Business.Models;
 using Andretta.Library.Database.Migrations;
 using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf.IO;
+using PdfSharpCore.Pdf;
 using PuppeteerSharp;
 using RazorEngine;
 using RazorEngine.Configuration;
@@ -167,8 +169,6 @@ namespace Andretta.Library.Database.Repositories
 
             var pageContent = Engine.Razor.RunCompile("BookReport.cshtml", null, content);
 
-            pageContent = pageContent.Replace("Andretta.Library.Business.Models.BookReport", "");
-
             return await GeneratePdfFromHtml(pageContent);
         }
 
@@ -183,10 +183,47 @@ namespace Andretta.Library.Database.Repositories
             using var page = await browser.NewPageAsync();
             await page.SetContentAsync(htmlContent);
 
-            return await page.PdfDataAsync(new PdfOptions
+            var existingPdfBytes = await page.PdfDataAsync(new PdfOptions
             {
-                PrintBackground = true
+                PrintBackground = true,
+                MarginOptions   = new PuppeteerSharp.Media.MarginOptions { Bottom = "20px", Top = "20px", Right = "20px", Left = "20px" }
             });
+
+            var pdfDocument = PdfReader.Open(new MemoryStream(existingPdfBytes), PdfDocumentOpenMode.Modify);
+
+            XPen borderPen     = new(XColor.FromArgb(0, 0, 0));
+            XUnit marginLeft   = XUnit.FromPoint(12);
+            XUnit marginRight  = XUnit.FromPoint(12);
+            XUnit marginTop    = XUnit.FromPoint(12);
+            XUnit marginBottom = XUnit.FromPoint(36);
+
+            for (int pageIndex = 0; pageIndex < pdfDocument.Pages.Count; pageIndex++)
+            {
+                PdfPage pdfPage = pdfDocument.Pages[pageIndex];
+
+                var mediaBox = pdfPage.MediaBox;
+
+                XRect borderRect = new(marginLeft,
+                                       marginTop,
+                                       mediaBox.Width - marginLeft - marginRight,
+                                       mediaBox.Height - marginTop - marginBottom);
+
+                using XGraphics gfx = XGraphics.FromPdfPage(pdfPage);
+
+                gfx.DrawRectangle(borderPen, borderRect);
+
+                XFont font            = new("Segoe UI", 10);
+                string pageNumberText = $"Page {pageIndex + 1} of {pdfDocument.Pages.Count}";
+                XSize textSize        = gfx.MeasureString(pageNumberText, font);
+
+                XPoint textPosition = new((mediaBox.Width - textSize.Width) / 2, mediaBox.Height - marginBottom + 15);
+
+                gfx.DrawString(pageNumberText, font, XBrushes.Black, textPosition);
+            }
+
+            using MemoryStream outputStream = new();
+            pdfDocument.Save(outputStream, false);
+            return outputStream.ToArray();
         }
     }
 }
